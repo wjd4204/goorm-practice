@@ -7,19 +7,18 @@ public class JavaEx01 {
     public static void main(String[] args) {
         // console 출력
         System.out.println("Hello, Java!");
-        //System.out.print("Enter your name: ");
+        System.out.print("Enter your name: ");
 
         // console 입력
         Scanner sc = new Scanner(System.in);
-        /*
+
         String name = sc.nextLine();
 
         System.out.println("Welcome, " + name + "!");
-*/
 
         // 데이터 타입
         // 정수형
-        int age = 24;
+        int age = 25;
         long population = 89000000000000L;
 
         // 문자형
@@ -34,6 +33,7 @@ public class JavaEx01 {
         System.out.println("Age: " + age);
 
         // 명시적 형변환(타입 캐스팅) : 큰 타입에서 작은 타입으로 수동 변환
+        /*
         double pi = 3.14;
         int truncatedPi = (int) pi;
 
@@ -50,5 +50,29 @@ public class JavaEx01 {
         if(num % 2==0)
             System.out.println(num + " is even");
         else System.out.println(num + " is odd");
-    }
+
+        // if
+        if (num < 10) System.out.println(num + "은 한 자리 숫자입니다.");
+        else if(num < 100) System.out.println(num + "은 두 자리 숫자입니다.");
+        else if(num < 1000) System.out.println(num + "은 세 자리 숫자입니다.");
+
+        // switch
+        switch(num){ // switch문의 변수는 프리미티브 타입
+            case 1:
+                System.out.println("일");
+                break;
+            case 2:
+                System.out.println("이");
+                break;
+            default:
+                System.out.println("아무것도 아님");
+                break;
+        } // end fo switch
+
+        // 반복문
+        // for: 고정된 횟수만큼.
+        // while문: 조건식이 참일 동안 반복
+        // do-while문: 코드 블록을 먼저 실행하고, 조건이 참이면 반복실행
+*/
+    } // end of main
 }
