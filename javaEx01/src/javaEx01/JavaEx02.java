@@ -31,6 +31,6 @@ public class JavaEx02 {
             System.out.println("대단해요, 맞췄군요!");
         }
 
-        System.out.println("bye");
+        System.out.println("hi");
     }
 }
