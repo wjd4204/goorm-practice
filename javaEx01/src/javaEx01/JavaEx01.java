@@ -33,7 +33,7 @@ public class JavaEx01 {
         System.out.println("Age: " + age);
 
         // 명시적 형변환(타입 캐스팅) : 큰 타입에서 작은 타입으로 수동 변환
-        /*
+
         double pi = 3.14;
         int truncatedPi = (int) pi;
 
@@ -73,6 +73,6 @@ public class JavaEx01 {
         // for: 고정된 횟수만큼.
         // while문: 조건식이 참일 동안 반복
         // do-while문: 코드 블록을 먼저 실행하고, 조건이 참이면 반복실행
-*/
+
     } // end of main
 }
