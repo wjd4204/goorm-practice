@@ -30,5 +30,7 @@ public class JavaEx02 {
         } while(guess != secret);{
             System.out.println("대단해요, 맞췄군요!");
         }
+
+        System.out.println("bye");
     }
 }
