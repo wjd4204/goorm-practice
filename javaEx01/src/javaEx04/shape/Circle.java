@@ -9,7 +9,6 @@ public class Circle extends Drawing {
         this.r = r;
     }
 
-
     @Override
     public void draw() {
         System.out.println("원의 면적은: " + (r*r*PI));
