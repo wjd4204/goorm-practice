@@ -4,11 +4,11 @@ public class Dog extends Animal {
 
     @Override
     public void show() {
-        super.show();
+        System.out.println("강아지");;
     }
 
     @Override
     public void sound() {
-        super.sound();
+        System.out.println("멍멍");
     }
 }
