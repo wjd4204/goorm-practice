@@ -10,6 +10,7 @@ public class Main {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
 
+        // 배열에 저장
         int[] A = new int[N];
         for(int i=0;i<N;i++) {
             A[i]=sc.nextInt();
