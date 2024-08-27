@@ -28,6 +28,7 @@ public class Calculator {
         System.out.println(calc.mul(8,4));
         System.out.println(calc.div(63,7));
         System.out.println(calc.div(8,0));
+        System.out.println("end");
 
     }
 }
