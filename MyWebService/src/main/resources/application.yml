@@ -1,0 +1,35 @@
+# tomcat
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# h2
+spring:
+  application:
+    name: MyWebService
+  datasource:
+    url: jdbc:h2:~/webtest
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+
+# jpa
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false
+    encoding: UTF-8
