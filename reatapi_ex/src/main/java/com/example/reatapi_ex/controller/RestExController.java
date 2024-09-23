@@ -17,7 +17,7 @@ public class RestExController {
 
     @GetMapping("/test")
     public String test() {
-        return "{}";
+        return "{test}";
     }
 
     @GetMapping("/test2")
