@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class PostService {
     }
 
     public PostViewResponse view(@Valid PostViewRequest postViewRequest) {
-        var entity =  postRepository.findById(postViewRequest.getPostId())  // Optional
+        var entity =  postRepository.findFirstByIdAndStatus(postViewRequest.getPostId(), "REGISTERED")  // Optional
                         .map( it->{
                             //entity 존재
                             if(!it.getPassword().equals(postViewRequest.getPassword())){
@@ -59,5 +60,38 @@ public class PostService {
                 .content(entity.getContent())
                 .postedAt(entity.getPostedAt())
                 .build();
+    }
+
+    public List<PostViewResponse> all(){
+        return postRepository.findAllByStatusOrderByIdDesc("REGISTERED").stream()
+                .map(post -> PostViewResponse.builder()
+                        .id(post.getId())
+                        .userName(post.getUserName())
+                        .email(post.getEmail())
+                        .title(post.getTitle())
+                        .content(post.getContent())
+                        .postedAt(post.getPostedAt())
+                        .build())
+                .toList();
+    }
+
+    public void delete(@Valid PostViewRequest postViewRequest) {
+        postRepository.findById(postViewRequest.getPostId())
+                .map( it -> {
+                    //엔티티가 존재할 경우
+                    if(!it.getPassword().equals(postViewRequest.getPassword())){
+                        throw new RuntimeException("패스워드가 일치하지 않습니다.");
+                    }
+
+                    it.setStatus("UNREGISTERED");
+                    postRepository.save(it);
+                    return it;
+                    }
+                    )
+                .orElseThrow(
+                        () -> {
+                            return new RuntimeException(("해당 게시글이 존재하지 않습니다 : " + postViewRequest.getPostId()));
+                        }
+                );
     }
 }
