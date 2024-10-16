@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 const getAverage = (numbers) => {
   console.log("평균값 계산 중...");
@@ -11,14 +11,19 @@ const Average = () => {
   const [number, setNumber] = useState("");
   const [list, setList] = useState([]);
 
-  const onChange = (e) => {
+  const onChange = useCallback((e) => {
     setNumber(e.target.value);
-  };
-  const onInsert = (e) => {
-    const nextList = list.concat(parseInt(number));
-    setList(nextList);
-    setNumber("");
-  };
+  }, []); // 두번째 매개변수에 비어있는리스트 => 컴포넌트가 처음 렌더링될 때만 함수 실행
+  const onInsert = useCallback(
+    (e) => {
+      const nextList = list.concat(parseInt(number));
+      setList(nextList);
+      setNumber("");
+    },
+    [number, list]
+  ); // number 혹은 list가 바뀌었을 때만 함수 생성
+
+  const avg = useMemo(() => getAverage(list), [list]);
 
   return (
     <div>
@@ -31,7 +36,7 @@ const Average = () => {
       </ul>
       <div>
         {" "}
-        <b>평균값 :</b> {getAverage(list)}{" "}
+        <b>평균값 :</b> {avg}
       </div>
     </div>
   );
