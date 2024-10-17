@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Link, Route, Routes } from "react-router-dom";
+import Home from "./Components/Home";
+import About from "./Components/About";
+import Product from "./Components/Product";
+import PageNotFound from "./Components/PageNotFound";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <nav>
+        <Link to="/">Home</Link> <Link to="/about">About</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="info" element={<About />} />
+        <Route path="/product/:productId" element={<Product />} />
+        {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는 경우 처리 */}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
