@@ -51,41 +51,41 @@ const Post = ({ post }) => {
   };
 
   return (
-    <Box>
-      <Typography variant="body2" onClick={handleClick}>
-        {post.title} | 작성자: {post.user_name} | 작성일:{" "}
-        {new Date(post.posted_at).toLocaleDateString()}
-      </Typography>
+      <Box>
+        <Typography variant="body2" onClick={handleClick}>
+          {post.title} | 작성자: {post.user_name} | 작성일:{" "}
+          {new Date(post.posted_at).toLocaleDateString()}
+        </Typography>
 
-      <Modal open={showModal} onClose={() => setShowModal(false)}>
-        <Box sx={modalStyle}>
-          <Typography variant="h6" gutterBottom>
-            비밀번호를 입력하세요
-          </Typography>
-          <TextField
-            type="password"
-            label="비밀번호"
-            fullWidth
-            value={password}
-            onChange={handlePasswordChange}
-            error={!!errorMessage}
-            helperText={errorMessage}
-          />
-          <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              확인
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setShowModal(false)}
-            >
-              취소
-            </Button>
+        <Modal open={showModal} onClose={() => setShowModal(false)}>
+          <Box sx={modalStyle}>
+            <Typography variant="h6" gutterBottom>
+              비밀번호를 입력하세요
+            </Typography>
+            <TextField
+                type="password"
+                label="비밀번호"
+                fullWidth
+                value={password}
+                onChange={handlePasswordChange}
+                error={!!errorMessage}
+                helperText={errorMessage}
+            />
+            <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
+              <Button variant="contained" color="primary" onClick={handleSubmit}>
+                확인
+              </Button>
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setShowModal(false)}
+              >
+                취소
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Modal>
-    </Box>
+        </Modal>
+      </Box>
   );
 };
 

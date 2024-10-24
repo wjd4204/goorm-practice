@@ -36,16 +36,16 @@ const PostDetail = () => {
 
   //게시글 상세 정보 가져오기
   const fetchPostDetails = useCallback(
-    async (password) => {
-      try {
-        const response = await ApiService.fetchPostDetails(id, password);
-        setPost(response.data);
-      } catch (error) {
-        setErrorMessage("Error fetching post details");
-        console.error("Error fetching post details: ", error);
-      }
-    },
-    [id]
+      async (password) => {
+        try {
+          const response = await ApiService.fetchPostDetails(id, password);
+          setPost(response.data);
+        } catch (error) {
+          setErrorMessage("Error fetching post details");
+          console.error("Error fetching post details: ", error);
+        }
+      },
+      [id]
   );
 
   //게시글 불러오기
@@ -89,68 +89,68 @@ const PostDetail = () => {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        {post.title}
-      </Typography>
-      <Typography variant="body1">작성자: {post.user_name} </Typography>
-      <Typography variant="body1">
-        작성일: {new Date(post.posted_at).toLocaleDateString()}
-      </Typography>
-      <Typography variant="body2"> {post.content} </Typography>
+      <Container>
+        <Typography variant="h4" gutterBottom>
+          {post.title}
+        </Typography>
+        <Typography variant="body1">작성자: {post.user_name} </Typography>
+        <Typography variant="body1">
+          작성일: {new Date(post.posted_at).toLocaleDateString()}
+        </Typography>
+        <Typography variant="body2"> {post.content} </Typography>
 
-      <Grid container spacing={2}>
-        <Grid item>
-          <Button onClick={() => {}}>수정하기</Button>
-        </Grid>
-        <Grid item>
-          <Button
-            onClick={() => {
-              handleActionClick("delete");
-            }}
-          >
-            삭제하기
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button
-            variant="outlined"
-            onClick={() => navigate(`/board/${post.board_id}`)}
-          >
-            목록으로 가기 {location.state.boardId}
-          </Button>
-        </Grid>
-      </Grid>
-
-      <Modal open={showModal} onClose={() => setShowModal(false)}>
-        <Box sx={modalStyle}>
-          <Typography variant="h6" gutterBottom>
-            비밀번호를 입력하세요
-          </Typography>
-          <TextField
-            type="password"
-            label="비밀번호"
-            fullWidth
-            value={password}
-            onChange={handlePasswordChange}
-            error={!!errorMessage}
-            helperText={errorMessage}
-          />
-          <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
-              확인
-            </Button>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Button onClick={() => {}}>수정하기</Button>
+          </Grid>
+          <Grid item>
             <Button
-              variant="contained"
-              color="primary"
-              onClick={() => setShowModal(false)}
+                onClick={() => {
+                  handleActionClick("delete");
+                }}
             >
-              취소
+              삭제하기
             </Button>
+          </Grid>
+          <Grid item>
+            <Button
+                variant="outlined"
+                onClick={() => navigate(`/board/${post.board_id}`)}
+            >
+              목록으로 가기 {location.state.boardId}
+            </Button>
+          </Grid>
+        </Grid>
+
+        <Modal open={showModal} onClose={() => setShowModal(false)}>
+          <Box sx={modalStyle}>
+            <Typography variant="h6" gutterBottom>
+              비밀번호를 입력하세요
+            </Typography>
+            <TextField
+                type="password"
+                label="비밀번호"
+                fullWidth
+                value={password}
+                onChange={handlePasswordChange}
+                error={!!errorMessage}
+                helperText={errorMessage}
+            />
+            <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
+              <Button variant="contained" color="primary" onClick={handleSubmit}>
+                확인
+              </Button>
+              <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => setShowModal(false)}
+              >
+                취소
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      </Modal>
-    </Container>
+        </Modal>
+      </Container>
   );
 };
 

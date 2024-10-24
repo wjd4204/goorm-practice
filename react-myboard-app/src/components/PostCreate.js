@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ApiService from "../services/ApiService";
 import { useNavigate } from "react-router-dom";
+import boardList from "./BoardList";
 
 const PostCreate = () => {
   const [userName, setUserName] = useState("");
@@ -8,6 +9,7 @@ const PostCreate = () => {
   const [email, setEmail] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [boardId, setBoardId] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,6 +20,7 @@ const PostCreate = () => {
       email: email,
       title: title,
       content: content,
+      boardId: boardId
     };
 
     try {
@@ -30,56 +33,56 @@ const PostCreate = () => {
   };
 
   return (
-    <div>
-      <h3>게시글 작성</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>작성자 이름:</label>{" "}
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>비밀번호:</label>{" "}
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>이메일:</label>{" "}
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>제목:</label>{" "}
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>내용:</label>{" "}
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">작성하기</button>
-      </form>
-    </div>
+      <div>
+        <h3>게시글 작성</h3>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>작성자 이름:</label>{" "}
+            <input
+                type="text"
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
+                required
+            />
+          </div>
+          <div>
+            <label>비밀번호:</label>{" "}
+            <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+          </div>
+          <div>
+            <label>이메일:</label>{" "}
+            <input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
+          </div>
+          <div>
+            <label>제목:</label>{" "}
+            <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+            />
+          </div>
+          <div>
+            <label>내용:</label>{" "}
+            <textarea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                required
+            />
+          </div>
+          <button type="submit">작성하기</button>
+        </form>
+      </div>
   );
 };
 
