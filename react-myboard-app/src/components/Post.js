@@ -1,12 +1,26 @@
 import React, { useState } from "react";
 import ApiService from "../services/ApiService";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 
 const Post = ({ post }) => {
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  // 모달 스타일
+  const modalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 4,
+  };
 
   // 게시글 클릭 시 모달 창 표시
   const handleClick = () => {
@@ -23,7 +37,9 @@ const Post = ({ post }) => {
     try {
       await ApiService.fetchPostDetails(post.id, password);
       // 비밀번호가 맞으면 게시글 상세 페이지로 이동
-      navigate(`/post/${post.id}`, { state: { password } });
+      navigate(`/post/${post.id}`, {
+        state: { password },
+      });
     } catch (error) {
       console.error("Error fetching post details: ", error);
       if (error.response && error.response.status === 400) {
@@ -35,30 +51,41 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div>
-      <div onClick={handleClick}>
-        <span>{post.title}</span>| 작성자: {post.user_name} | 작성일:{" "}
+    <Box>
+      <Typography variant="body2" onClick={handleClick}>
+        {post.title} | 작성자: {post.user_name} | 작성일:{" "}
         {new Date(post.posted_at).toLocaleDateString()}
-      </div>
-      {showModal && (
-        // 비밀번호 입력 모달창
-        <div className="modal">
-          <div className="modal_content">
-            <h4>비밀번호를 입력하세요</h4>
-            <input
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-              placeholder="비밀번호"
-            />
-            {/* 오류 메시지 표시  */}
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <button onClick={handleSubmit}>확인</button>
-            <button onClick={() => setShowModal(false)}>취소</button>
-          </div>
-        </div>
-      )}
-    </div>
+      </Typography>
+
+      <Modal open={showModal} onClose={() => setShowModal(false)}>
+        <Box sx={modalStyle}>
+          <Typography variant="h6" gutterBottom>
+            비밀번호를 입력하세요
+          </Typography>
+          <TextField
+            type="password"
+            label="비밀번호"
+            fullWidth
+            value={password}
+            onChange={handlePasswordChange}
+            error={!!errorMessage}
+            helperText={errorMessage}
+          />
+          <Box sx={{ mt: 2, display: "flex", justifyContent: "space-between" }}>
+            <Button variant="contained" color="primary" onClick={handleSubmit}>
+              확인
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setShowModal(false)}
+            >
+              취소
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+    </Box>
   );
 };
 

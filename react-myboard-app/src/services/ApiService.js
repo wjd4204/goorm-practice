@@ -15,6 +15,11 @@ const ApiService = {
     return axios.get(`${API_BASE_URL}/post/all`);
   },
 
+  //특정 boardId에 대한 게시글 목록을 가져옴
+  fetchPostsByBoardId(boardId) {
+    return axios.get(`${API_BASE_URL}/post/${boardId}`);
+  },
+
   createPost(postData) {
     return axios.post(`${API_BASE_URL}/post`, postData);
   },
@@ -23,6 +28,14 @@ const ApiService = {
     return axios.post(`${API_BASE_URL}/post/view`, {
       post_id: postId,
       password: password,
+    });
+  },
+
+  // 게시글 삭제 API 호출
+  deletePost(postId, password) {
+    return axios.post(`${API_BASE_URL}/post/delete`, {
+      post_id: postId, // 서버에서 기대하는 post_id
+      password: password, // 비밀번호 전달
     });
   },
 };
